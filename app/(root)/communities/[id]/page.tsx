@@ -63,7 +63,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
               value="members"
               className="w-full text-light-1">
                <section className="mt-9 flex flex-col gap-10">
-                    {communityDetails?.member.map((member:any) => {
+                    {communityDetails?.members.map((member:any) => {
                         return <UserCard
                         key={member.id}
                         id={member.id}
