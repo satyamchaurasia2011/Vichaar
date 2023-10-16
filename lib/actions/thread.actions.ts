@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import Thread from "../models/thread.model";
 import User from "../models/user.models";
 import { connectToDB } from "../mongoose";
+import Community from "../models/community.model";
 
 interface Params {
   text: string;
@@ -11,6 +12,7 @@ interface Params {
   communityId: string | null;
   path: string;
 }
+
 export async function createThread({
   text,
   author,
@@ -19,19 +21,33 @@ export async function createThread({
 }: Params) {
   try {
     connectToDB();
-    const createThread = await Thread.create({
+
+    const communityIdObject = await Community.findOne(
+      { id: communityId },
+      { _id: 1 }
+    );
+      console.log(communityIdObject)
+    const createdThread = await Thread.create({
       text,
       author,
-      community: null,
+      community: communityIdObject, // Assign communityId if provided, or leave it null for personal account
     });
 
-    // Update user model
+    // Update User model
     await User.findByIdAndUpdate(author, {
-      $push: { threads: createThread._id },
+      $push: { threads: createdThread._id },
     });
+
+    if (communityIdObject) {
+      // Update Community model
+      await Community.findByIdAndUpdate(communityIdObject, {
+        $push: { threads: createdThread._id },
+      });
+    }
+
     revalidatePath(path);
   } catch (error: any) {
-    throw new Error(`Failed to create Thought: ${error.message}`);
+    throw new Error(`Failed to create thread: ${error.message}`);
   }
 }
 
@@ -99,9 +115,10 @@ export async function fetchPostById(id: string) {
             },
           },
         ],
-      }).exec();
-      return post;
-  } catch (error : any) {
+      })
+      .exec();
+    return post;
+  } catch (error: any) {
     throw new Error(`Failed to fetch Thought: ${error.message}`);
   }
 }
@@ -116,13 +133,13 @@ export async function addCommentToPost(
   try {
     // find the origninal post
     const originalPost = await Thread.findById(postId);
-    if(!originalPost){
+    if (!originalPost) {
       throw new Error("Post not found!");
     }
     // create a new post with the comment text
-    const commentPost = new  Thread({
-      text : commentText,
-      author : userId,
+    const commentPost = new Thread({
+      text: commentText,
+      author: userId,
       parentId: postId,
     });
     // Save the new thread
@@ -132,7 +149,7 @@ export async function addCommentToPost(
     //save the original thread
     await originalPost.save();
     revalidatePath(path);
-  } catch (error : any) {
+  } catch (error: any) {
     throw new Error(`Error adding comment to post: ${error.message}`);
   }
 }

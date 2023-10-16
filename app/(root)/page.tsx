@@ -6,7 +6,7 @@ import { setDefaultResultOrder } from "dns/promises";
 export default async function Home() {
   const user = await currentUser();
   const result = await fetchPosts(1, 30);
-  // console.log(result)
+  //  console.log(result)
   return (
     <div>
      <h1 className="head-text text-left">Home</h1>

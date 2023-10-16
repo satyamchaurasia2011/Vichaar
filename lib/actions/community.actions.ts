@@ -34,7 +34,7 @@ export async function createCommunity(
       bio,
       createdBy: user._id, // Use the mongoose ID of the user
     });
-
+    console.log(newCommunity)
     const createdCommunity = await newCommunity.save();
 
     // Update User model

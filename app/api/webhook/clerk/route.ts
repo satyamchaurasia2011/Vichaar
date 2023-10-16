@@ -16,7 +16,7 @@ import {
   deleteCommunity,
   removeUserFromCommunity,
   updateCommunityInfo,
-} from "@/lib/actions/community.action";
+} from "@/lib/actions/community.actions";
 
 // Resource: https://clerk.com/docs/integration/webhooks#supported-events
 // Above document lists the supported events
@@ -67,7 +67,7 @@ export const POST = async (request: Request) => {
     // Show what evnt?.data sends from above resource
     const { id, name, slug, logo_url, image_url, created_by } =
       evnt?.data ?? {};
-
+      console.log(id)
     try {
       // @ts-ignore
       await createCommunity(
