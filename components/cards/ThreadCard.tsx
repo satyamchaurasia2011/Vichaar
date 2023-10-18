@@ -39,7 +39,7 @@ function ThreadCard({
   isComment,
 }: Props) {
   //const [like, setLike] = useState(false);
-  const like = true;
+  const like = false;
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
