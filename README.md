@@ -33,7 +33,8 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 
 1. Clone the repository:
-   ```sh git clone https://github.com/yourusername/thread-clone.git ```
+   ```sh 
+   git clone https://github.com/yourusername/thread-clone.git 
 
 2. Install dependencies:
     ```sh cd thread-clone ```
