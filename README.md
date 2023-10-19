@@ -37,14 +37,16 @@ Before you begin, ensure you have met the following requirements:
    git clone https://github.com/yourusername/thread-clone.git 
 
 2. Install dependencies:
-    ```sh cd thread-clone ```
-    ```sh npm install ```
+    ```sh 
+    cd thread-clone 
+    sh npm install 
 
 3. Set up the environment variables:
     - Create a .env file based on the required configuration values.
 
 4. Start the application:
-    ```sh npm start ```
+    ```sh 
+    npm start
 
 ### Usage
 - Visit the application in your web browser (default: http://localhost:3000).
