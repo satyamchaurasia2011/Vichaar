@@ -34,12 +34,12 @@ Before you begin, ensure you have met the following requirements:
 
 1. Clone the repository:
    ```sh 
-   git clone https://github.com/yourusername/thread-clone.git 
+   git clone https://github.com/satyamchaurasia2011/Vichaar.git
 
 2. Install dependencies:
     ```sh 
-    cd thread-clone 
-    sh npm install 
+    cd vichaar
+    npm install 
 
 3. Set up the environment variables:
     - Create a .env file based on the required configuration values.
@@ -50,7 +50,7 @@ Before you begin, ensure you have met the following requirements:
 
 ### Usage
 - Visit the application in your web browser (default: http://localhost:3000).
-- Sign up or log in to create threads, post comments, and interact with the community.
+- Sign up or log in to create vichaar, post comments, and interact with the community.
 - Explore the various features and enjoy discussions!
 
 ### Contributing
