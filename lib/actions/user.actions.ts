@@ -122,7 +122,7 @@ export async function fetchUserPosts(userId: string) {
     connectToDB();
     //find all threads given by userId
 
-    // TODO: Populate community
+   
     const threads = await User.findOne({ id: userId }).populate({
       path: "threads",
       model: Thread,
